@@ -43,8 +43,10 @@
   border-radius: 12px;
   box-shadow: @base-box-shadow inset;
 }
+// カーソル背景
 .base-cursor() {
-  background: @rpgmv-cursor-background;
+  // 影も込みで明滅させるため不透明度は色自体ではなく opacity で制御
+  background: fadein(@rpgmv-cursor-background, 100%);
   box-shadow: @rpgmv-cursor-box-shadow;
   animation: likeRPGMV-cursor (20000ms/60) linear 0 alternate forwards;
   .active() {
