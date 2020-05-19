@@ -43,6 +43,15 @@ a[href] {
   }
 }
 
+.icon {
+  &::before {
+    width: @component-icon-size;
+    height: @component-icon-size;
+    font-size: @component-icon-size;
+    text-align: center;
+  }
+}
+
 atom-pane {
   .base-background();
   .base-borderless();
