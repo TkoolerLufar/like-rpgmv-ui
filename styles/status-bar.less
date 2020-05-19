@@ -7,8 +7,11 @@
 // Overrides: atom/status-bar
 
 .status-bar {
-  font-size: @font-size;
-  color: @text-color;
-  border-top: 1px solid @base-border-color;
-  background-color: @tree-view-background-color;
+  .base-font();
+  height: (14px * 2 + @line-height);
+  padding: 0 14px;
+  box-sizing: content-box;
+  &-left, &-right {
+    padding: 14px 0;
+  }
 }

@@ -1,0 +1,19 @@
+// 左右のドックのスタイル
+
+// ドックの背景。ウィンドウ仕様にする
+.atom-dock-mask {
+  background: white;
+}
+
+// ドックのサイズ変更ハンドル。既定では透明らしいので白く
+.atom-dock-resize-handle {
+  &.left, &.right {
+    background: white;
+    width: 3px;
+  }
+}
+
+// ドックの出し入れをするボタン
+.atom-dock-toggle-button .atom-dock-toggle-button-inner {
+  border-width: 3px;
+}

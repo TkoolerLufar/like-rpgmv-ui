@@ -1,4 +1,3 @@
-
 // Base
 // -------------------
 
@@ -9,13 +8,45 @@
 
 
 body {
-  font-size: @font-size;
+  .base-font();
+  .base-borderless();
+  border-radius: 16px;
+  padding: 4px;
   color: @text-color;
-  background-color: @app-background-color;
+  text-shadow:
+    -1px -1px 0 @rpgmv-outline-color,
+    -1px +1px 0 @rpgmv-outline-color,
+    +1px -1px 0 @rpgmv-outline-color,
+    +1px +1px 0 @rpgmv-outline-color;
+  // -webkit-text-stroke: 1px @rpgmv-outline-color;
+  background: @app-background-color;
+}
+
+a[href] {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  padding: 0 4px;
+  &::before {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+  &:hover::before {
+    .base-cursor();
+    .base-cursor.active();
+  }
 }
 
 atom-pane {
-  border-right: 1px solid @base-border-color;
+  .base-background();
+  .base-borderless();
+  border-right: 3px solid @base-border-color;
   &:last-child {
     border-right: none;
   }
