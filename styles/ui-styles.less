@@ -1,0 +1,69 @@
+// よく使うスタイルの Mix-in
+
+// ウィンドウ開閉アニメーション
+@keyframes likeRPGMV-open {
+  from {
+    transform: scaleY(0);
+    transform-origin: 50% 50%;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: 50% 50%;
+  }
+}
+@keyframes likeRPGMV-open-contents {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+}
+// カーソル明滅アニメーション
+@keyframes likeRPGMV-cursor {
+  from {
+    opacity: 115 / 255;
+  }
+  to {
+    opacity: 115 * 95 / 255 / 255;
+  }
+}
+
+// ウィンドウ背景
+.base-background() {
+  background: @base-background-color @base-background-image;
+}
+.base-border() {
+  border: @base-border;
+  border-radius: 12px;
+  box-shadow: @base-box-shadow, @base-box-shadow inset;
+}
+.base-borderless() {
+  border: none;
+  border-radius: 12px;
+  box-shadow: @base-box-shadow inset;
+}
+.base-cursor() {
+  background: @rpgmv-cursor-background;
+  box-shadow: @rpgmv-cursor-box-shadow;
+  animation: likeRPGMV-cursor (20000ms/60) linear 0 alternate forwards;
+  .active() {
+    animation-iteration-count: infinite;
+  }
+}
+.base-font() {
+  font: @font-size/@line-height @font-family;
+}
+// .base-modal() {
+//   &.open, &.close {
+//     animation: likeRPGMV-open 133ms linear both;
+//   }
+//   &.open > *, &.close > * {
+//     animation: likeRPGMV-open-contents step-end both;
+//     animation-duration: inherit;
+//     animation-delay: inherit;
+//   }
+//   &.close, &.close > * {
+//     animation-direction: reverse;
+//   }
+// }

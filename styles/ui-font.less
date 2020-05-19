@@ -1,0 +1,40 @@
+// UIフォントの定義
+// Webフォントについてはソースを落としてWindowsアクセサリの
+// 「文字コード表」でグリフの存在を確認、それを元に unicode-range を調整する
+// あとWebフォントの形式は Atom が Chromium なので WOFF だけ指定
+.mplus() {
+  // ASCII
+  .basic_latin(@type, @style, @weight) {
+    font-family: GameFont;
+    unicode-range: U+20-7F;
+    src:
+      local("M+ @{type}@{style}"),
+      local("M+ @{type}@{style} @{weight}"),
+      url("http://mplus-fonts.osdn.jp/webfonts/basic_latin/mplus-@{type}@{style}-@{weight}-sub.woff") format('woff');
+  }
+  // 日本語
+  .general-j(@type, @style, @weight) {
+    font-family: GameFont;
+    unicode-range: U+3000-301F, U+3041-30FF, U+4E00-9FFF, U+FF??;
+    src:
+      local("M+ @{type}@{style}"),
+      local("M+ @{type}@{style} @{weight}"),
+      url("http://mplus-fonts.osdn.jp/webfonts/general-j/mplus-@{type}-@{weight}-sub.woff") format('woff');
+  }
+}
+@font-face {
+  font-weight: normal;
+  .mplus.basic_latin(1, m, regular);
+}
+@font-face {
+  font-weight: bold;
+  .mplus.basic_latin(1, m, bold);
+}
+@font-face {
+  font-weight: normal;
+  .mplus.general-j(1, m, regular);
+}
+@font-face {
+  font-weight: bold;
+  .mplus.general-j(1, m, bold);
+}

@@ -10,17 +10,48 @@
 // Try to edit some of the values below to see your theme change.
 // A good start is to change the color of the `@base-background-color` variable.
 
+// RPGMV 標準ウィンドウのテキスト色
+@rpgmv-text-color:
+  #ffffff #20a0d6 #ff784c #66cc40 #99ccff #ccc0ff #ffffa0 #808080
+  #c0c0c0 #2080cc #ff3810 #00a010 #3e9ade #a098ff #ffcc20 #000000
+  #84aaff #ffff40 #ff2020 #202040 #e08040 #f0c040 #4080c0 #40c0f0
+  #80ff80 #c08080 #8080ff #ff80ff #00a040 #00e060 #a060e0 #c080ff;
+
+// 文字の縁取りの色
+@rpgmv-outline-color: rgba(0, 0, 0, 0.5);
+
+// UI 文字色
+@rpgmv-normal-color    : extract(@rpgmv-text-color,  1);
+@rpgmv-system-color    : extract(@rpgmv-text-color, 17);
+@rpgmv-crisis-color    : extract(@rpgmv-text-color, 18);
+@rpgmv-death-color     : extract(@rpgmv-text-color, 19);
+@rpgmv-gauge-back-color: extract(@rpgmv-text-color, 20);
+@rpgmv-hp-gauge-color-1: extract(@rpgmv-text-color, 21);
+@rpgmv-hp-gauge-color-2: extract(@rpgmv-text-color, 22);
+@rpgmv-mp-gauge-color-1: extract(@rpgmv-text-color, 23);
+@rpgmv-mp-gauge-color-2: extract(@rpgmv-text-color, 24);
+@rpgmv-mp-cost-color   : extract(@rpgmv-text-color, 24);
+@rpgmv-power-up-color  : extract(@rpgmv-text-color, 25);
+@rpgmv-power-down-color: extract(@rpgmv-text-color, 26);
+@rpgmv-tp-gauge-color-1: extract(@rpgmv-text-color, 29);
+@rpgmv-tp-gauge-color-2: extract(@rpgmv-text-color, 30);
+@rpgmv-tp-cost-color   : extract(@rpgmv-text-color, 30);
+
+// ウィンドウカーソル色
+@rpgmv-cursor-background: #a3ffe0;
+@rpgmv-cursor-box-shadow: 0 0 3px 3px #f3fffb inset;
+@rpgmv-pending-color   : fadeout(@rpgmv-cursor-background, 115/255);
 
 // Text Colors
-@text-color:           hsl(0,0%,66%);
-@text-color-subtle:    hsl(0,0%,50%);
-@text-color-highlight: hsl(0,0%,94%);
-@text-color-selected:  hsl(0,0%,100%);
+@text-color:           #ffffff;                   // 通常の文字色
+@text-color-subtle:    fadeout(@text-color, 50%); // サブタイ文字色
+@text-color-highlight: @rpgmv-system-color;       // ハイライト色
+// @text-color-selected:  @rpgmv-normal-color;       // 選択されてる時の色
 
-@text-color-info:    hsl(219,  79%, 66%);
-@text-color-success: hsl(140,  44%, 62%);
-@text-color-warning: hsl( 36,  60%, 72%);
-@text-color-error:   hsl(  9, 100%, 64%);
+@text-color-info:    @rpgmv-system-color;
+@text-color-success: @rpgmv-power-up-color;
+@text-color-warning: @rpgmv-crisis-color;
+@text-color-error:   @rpgmv-death-color;
 
 // Background colors
 @background-color-info:    hsl(208, 100%, 50%);
@@ -29,18 +60,26 @@
 @background-color-error:   hsl(0,    70%, 50%);
 
 @background-color-highlight: lighten(@base-background-color, 5%);
-@background-color-selected:  lighten(@base-background-color, 10%);
-@app-background-color:       darken(@base-background-color, 5%);
+@background-color-selected:  @rpgmv-cursor-background;
+@app-background-color:       white;
 
 // Base colors
-@base-background-color: hsl(222,6%,22%);
-@base-border-color:     darken(@base-background-color, 8%);
+@base-background-color: rgba(42, 37, 43, 199/255);
+@base-background-image: repeating-linear-gradient(
+  transparent,
+  transparent 1px,
+  rgba(0, 0, 0, 33/255) 1px,
+  rgba(0, 0, 0, 33/255) 2px
+);
+@base-border-color: #ffffff;
+@base-border: 3px solid @base-border-color;
+@base-box-shadow: 0 0 0 1px hsla(0,0%,0%,77/255);
 
 // Component colors
 @pane-item-background-color: @base-background-color;
 @pane-item-border-color:     @base-border-color;
 
-@input-background-color: @app-background-color;
+@input-background-color: fadeout(@rpgmv-gauge-back-color, 50%);
 @input-border-color:     @base-border-color;
 
 @tool-panel-background-color: @base-background-color;
@@ -60,7 +99,7 @@
 @button-background-color-selected: @button-background-color-hover;
 @button-border-color:              @base-border-color;
 
-@tab-bar-background-color:    @base-background-color;
+@tab-bar-background-color:    transparent;
 @tab-bar-border-color:        @base-border-color;
 @tab-background-color:        @tab-bar-background-color;
 @tab-background-color-active: lighten(@tab-bar-background-color, 10%);
@@ -70,25 +109,26 @@
 @tree-view-border-color:     @base-border-color;
 
 // Site colors
-@ui-site-color-1: hsl(208, 100%, 50%); // blue
-@ui-site-color-2: hsl(160,  70%, 42%); // green
-@ui-site-color-3: hsl(32,   60%, 50%); // orange
-@ui-site-color-4: #D831B0;             // pink
-@ui-site-color-5: #EBDD5B;             // yellow
+@ui-site-color-1: extract(@rpgmv-text-color,  2); // blue
+@ui-site-color-2: extract(@rpgmv-text-color,  4); // green
+@ui-site-color-3: extract(@rpgmv-text-color, 15); // orange
+@ui-site-color-4: extract(@rpgmv-text-color,  6); // pink
+@ui-site-color-5: extract(@rpgmv-text-color,  7); // yellow
 
 // Sizes
-@font-size: 12px;
-@input-font-size: 14px;
+@font-size: 28px;
+@input-font-size: 28px;
+@line-height: 36px;
 
-@disclosure-arrow-size: 12px;
+@disclosure-arrow-size: 28px;
 
-@component-padding: 10px;
-@component-icon-padding: 5px;
-@component-icon-size: 16px;
-@component-line-height: 25px;
+@component-padding: 14px;
+@component-icon-padding: 2px;
+@component-icon-size: 32px;
+@component-line-height: 36px;
 
-@tab-height: 30px;
+@tab-height: 36px;
 
 // Misc
 @component-border-radius: 2px;
-@font-family: '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+@font-family: GameFont, 'M+ 1m', 'M+ 1m regular', monospace;
