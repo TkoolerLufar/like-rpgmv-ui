@@ -8,9 +8,12 @@
 
 .status-bar {
   .base-font();
-  height: (14px * 2 + @font-size * @line-height);
-  padding: 0 14px;
+  height: (@font-size * @line-height);
+  padding: 14px 0;
   box-sizing: content-box;
+  .flexbox-repaint-hack {
+    padding: 0 14px;
+  }
   &-left, &-right {
     padding: 14px 0;
   }
