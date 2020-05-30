@@ -16,7 +16,9 @@
       // background-color: @background-color-selected;
       &:before {
         .base-cursor();
-        .base-cursor.active();
+        :focus & {
+          .base-cursor.active();
+        }
       }
     }
   }
@@ -31,7 +33,9 @@
     // color: @text-color-selected;
     &:before {
       .base-cursor();
-      .base-cursor.active();
+      :focus & {
+        .base-cursor.active();
+      }
     }
   }
 }
