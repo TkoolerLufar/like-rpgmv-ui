@@ -1,10 +1,77 @@
+// RPGMV風ゲージのスタイル
+
+// ゲージ幅の4倍の幅でグラデーションを描くことを前提に、
+// そのグラデーションを右端から左端に流す
+@keyframes likeRPGMV-gauge-indeterminate {
+  from {
+    background-position: right 0 bottom 0;
+  }
+  to {
+    background-position: left 0 bottom 0;
+  }
+}
+.gauge(@min-color, @max-color) {
+  // 値を表示するため文字くらいの高さに調整
+  @gauge-height: 6px;
+  position: relative;
+  height: 1em;
+  line-height: 1;
+  padding: 0;
+  -webkit-appearance: none;
+  // 実際のゲージ部分は細くして下に付ける
+  &::-webkit-progress-inner-element {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: @gauge-height;
+  }
+  &::-webkit-progress-bar {
+    background: @rpgmv-gauge-back-color;
+  }
+  &::-webkit-progress-value {
+    background-image: linear-gradient(to right, @min-color, @max-color);
+  }
+  // indeterminate は背景を流す
+  &:indeterminate {
+    background: repeating-linear-gradient(
+      to right,
+      @min-color                0%,
+      @max-color               25%,
+      @rpgmv-gauge-back-color  50%,
+      @min-color               75%,
+      @max-color              100%);
+    background-size: 400% @gauge-height;
+    background-repeat: repeat-x;
+    animation: likeRPGMV-gauge-indeterminate 2s linear infinite;
+    &::-webkit-progress-bar {
+      background: none;
+    }
+  }
+  // 値を文字列でも表示
+  &::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+  }
+  &:indeterminate[max]::after {
+    content: "-/" attr(max);
+  }
+  &:not(:indeterminate)::after {
+    content: attr(value) "/" attr(max);
+  }
+}
+
 
 // Progress
 // -------------------
 
-// The `progress` element is unstyled and defined by the OS.
-// See https://css-tricks.com/html5-progress-element/ in case you want to customize it.
-
+progress {
+  .gauge(@rpgmv-tp-gauge-color-1, @rpgmv-tp-gauge-color-2);
+}
 
 // Spinner -------------------
 
